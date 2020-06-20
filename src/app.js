@@ -11,7 +11,7 @@ app.set("view engine", 'hbs' )
 app.set("views", path.join(__dirname, "../templates/views"))
 hbs.registerPartials(path.join(__dirname, '../templates/partials'))
 
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 app.get('', (req, res) => {
     res.render('index', {
@@ -77,5 +77,5 @@ app.get('*', (req,res) => {
 })
 
 app.listen(port, () => {
-    console.log('Server started')
+    console.log('Server started at' + port)
 })
