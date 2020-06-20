@@ -11,6 +11,8 @@ app.set("view engine", 'hbs' )
 app.set("views", path.join(__dirname, "../templates/views"))
 hbs.registerPartials(path.join(__dirname, '../templates/partials'))
 
+const port = process.env.port || 3000
+
 app.get('', (req, res) => {
     res.render('index', {
         title : 'Weather',
@@ -48,8 +50,7 @@ app.get('/weather', (req, res) => {
                 error
             }); 
         }
-        const {humidity, temperature} = response;
-        const location = req.query.location;
+        const {humidity, temperature , location} = response;
         return res.send({
             humidity,
             temperature,
@@ -75,6 +76,6 @@ app.get('*', (req,res) => {
     })
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server started')
 })

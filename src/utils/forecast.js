@@ -19,14 +19,14 @@ const forecast = (location, callback) => {
             callback('User error prevented getting of gelocation', undefined)
         }
         else{
-            forecast2(undefined, {body}, callback)
+            forecast2(undefined, body, callback)
         }
     });
 
 
 }
 
-const forecast2 = (error, {body} , callback) => {
+const forecast2 = (error, body , callback) => {
     const weatherstackAccessKey = 'f128627e186255920d983e87e6a14985'
     const lat = body.features[0].geometry.coordinates[1];
     const long = body.features[0].geometry.coordinates[0];
@@ -42,9 +42,12 @@ const forecast2 = (error, {body} , callback) => {
         }
         else{
             const { temperature, humidity }  = body.current;
+            const fullLocation = body.location.name + "," + body.location.country
+            console.log(fullLocation)
             callback(undefined, {
                 temperature,
-                humidity
+                humidity, 
+                location: fullLocation
             })
         }
     });

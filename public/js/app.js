@@ -10,13 +10,14 @@ formSelector.addEventListener('submit', (e) => {
     const stringToSearch = searchSelector.value
 
 
-    fetch("http://localhost:3000/weather?location=" + stringToSearch).then((response) => {
+    fetch("/weather?location=" + stringToSearch).then((response) => {
 
     response.json().then((data) => {
         if(data.error){
             document.querySelector('#locationResult').innerHTML = data.error;
         }else{
-            document.querySelector('#locationResult').innerHTML = 'humidity :' + data.humidity;
+            const msg = 'Location:' + data.location + '.The temperature out is ' + data.temperature + '. The chance of rain is ' + data.humidity;
+            document.querySelector('#locationResult').innerHTML = msg
         }
         
     })
